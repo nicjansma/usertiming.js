@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>UserTiming.js Test Suite</title>
+    <script src="../deps/nodeunit.js"></script>
+    <script src="../src/usertiming.js"></script>
+    <link rel="stylesheet" href="../deps/nodeunit.css" type="text/css" media="screen" />
+    <script>
+      var _requires = {
+          "../src/usertiming": window.performance
+      };
+      this.require = function (name) { return _requires[name]; };
+      this.exports = {};
+    </script>
+    <script src="test.js"></script>
+  </head>
+  <body>
+    <h1 id="nodeunit-header">UserTiming.js Test Suite</h1>
+    
+    <div>Added window.performance.now() support?
+        <span id='addedNow'></span>
+        <span id='addedNowPrefixed'></span>
+    </div>
+    <div>Added PerformanceTimeline support?
+        <span id='addedPerformanceTimeline'></span>
+        <span id='addedPerformanceTimelinePrefixed'></span>
+    </div>
+    <div>Added UserTiming support?
+        <span id='addedUserTiming'></span>
+        <span id='addedUserTimingPrefixed'></span>
+    </div>
+    
+    <script>
+        // show what was added
+        document.getElementById('addedNow').innerHTML = window.performance.userTimingJsNow ? 'Yes' : 'No';
+        document.getElementById('addedNowPrefixed').innerHTML = window.performance.userTimingJsNowPrefixed ? '(prefixed)' : '';
+        
+        document.getElementById('addedPerformanceTimeline').innerHTML = window.performance.userTimingJsPerformanceTimeline ? 'Yes' : 'No';
+        document.getElementById('addedPerformanceTimelinePrefixed').innerHTML = window.performance.userTimingJsPerformanceTimelinePrefixed ? '(prefixed)' : '';
+        
+        document.getElementById('addedUserTiming').innerHTML = window.performance.userTimingJsUserTiming ? 'Yes' : 'No';
+        document.getElementById('addedUserTimingPrefixed').innerHTML = window.performance.userTimingJsUserTimingPrefixed ? '(prefixed)' : '';
+        
+        // run tests
+        nodeunit.run({'test': this.exports});
+    </script>
+  </body>
+</html>

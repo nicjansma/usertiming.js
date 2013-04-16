@@ -1,0 +1,29 @@
+{
+    "name": "usertiming",
+    "description": "W3C UserTiming polyfill",
+    "main": "./src/usertiming",
+    "author": "Nic Jansma",
+    "version": "0.1.0",
+    "repository" : {
+        "type" : "git",
+        "url" : "http://github.com/nicjansma/usertiming.js.git"
+    },
+    "bugs" : {
+        "url" : "http://github.com/nicjansma/usertiming.js/issues"
+    },
+    "licenses" : [
+        {
+            "type" : "MIT",
+            "url" : "http://github.com/nicjansma/usertiming/raw/master/LICENSE"
+        }
+    ],
+    "devDependencies": {
+        "nodeunit": ">0.0.0",
+        "uglify-js": "1.2.x",
+        "jshint": ">0.0.0",
+        "grunt": "~0.4.0",
+        "grunt-contrib-jshint": ">0.0.0",
+        "grunt-contrib-nodeunit": ">0.0.0",
+        "grunt-contrib-uglify": ">0.0.0"
+    }
+}
