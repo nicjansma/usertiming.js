@@ -109,7 +109,7 @@ The following changes were made to the W3C test suite to work with UserTiming.js
 
 * All tests were updated to add a reference to ``../src/usertiming.js`` so usertiming.js is actually used
 
-* ``test_user_timing_measure.htm`` and ``test_user_timing_mark.ht``: The threshold was increased from 20ms to 50ms
+* ``test_user_timing_measure.htm`` and ``test_user_timing_mark.htm``: The threshold was increased from 20ms to 50ms
     (due to inefficiencies in the test suite)
 
 Additional notes:
