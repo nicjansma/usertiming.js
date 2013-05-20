@@ -26,7 +26,7 @@
 
         test.equal(1, entries.length);
         test.equal('foo', entries[0].name);
-        test.ok(entries[0].startTime > 0);
+        test.ok(entries[0].startTime >= 0);
 
         test.done();
     };
