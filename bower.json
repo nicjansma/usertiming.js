@@ -1,0 +1,29 @@
+{
+  "name": "usertiming.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/nicjansma/usertiming.js",
+  "authors": [
+    "Nic Jansma <nic@nicj.net>"
+  ],
+  "description": "W3C UserTiming polyfill",
+  "main": "dist/usertiming.min.js",
+  "keywords": [
+    "usertiming",
+    "polyfill",
+    "timing",
+    "performancetimeline",
+    "performance"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "deps",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "test-w3c",
+    "tests"
+  ]
+}
