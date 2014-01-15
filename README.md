@@ -48,7 +48,11 @@ usertiming.js is also available as the [npm usertiming module](https://npmjs.org
 using  Node Package Manager (npm):
 
     npm install usertiming
-    
+
+usertiming.js is also available via [bower](http://bower.io/). You can install using:
+
+    bower install usertiming.js
+
 ## Usage
 
 Please see the [W3C UserTiming API Reference](http://www.w3.org/TR/user-timing/) for details on how to use the 
