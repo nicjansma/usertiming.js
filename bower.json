@@ -21,7 +21,6 @@
     "deps",
     "node_modules",
     "bower_components",
-    "src",
     "test",
     "test-w3c",
     "tests"
