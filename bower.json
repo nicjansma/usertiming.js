@@ -6,7 +6,7 @@
     "Nic Jansma <nic@nicj.net>"
   ],
   "description": "W3C UserTiming polyfill",
-  "main": "dist/usertiming.min.js",
+  "main": "src/usertiming.js",
   "keywords": [
     "usertiming",
     "polyfill",
