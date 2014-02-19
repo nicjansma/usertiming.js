@@ -51,7 +51,7 @@ using  Node Package Manager (npm):
 
 usertiming.js is also available via [bower](http://bower.io/). You can install using:
 
-    bower install usertiming.js
+    bower install usertiming
 
 ## Usage
 
