@@ -1,8 +1,8 @@
 # UserTiming.js
 
-v0.1.0
+v0.1.1
 
-Copyright 2013 Nic Jansma
+Copyright 2014 Nic Jansma
 
 http://nicj.net
 
@@ -126,4 +126,5 @@ Additional notes:
 
 ## Version History
 
-* v0.0.1 - 2013-04-15: Initial version
+* v0.1.0 - 2013-04-15: Initial version
+* v0.1.1 - 2014-02-19: Updated dependencies, grunt lint task, bower package name
