@@ -1,6 +1,6 @@
 {
   "name": "usertiming",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/nicjansma/usertiming.js",
   "authors": [
     "Nic Jansma <nic@nicj.net>"
@@ -19,6 +19,7 @@
     "**/.*",
     "Gruntfile.js",
     "deps",
+    "dist",
     "node_modules",
     "bower_components",
     "test",
