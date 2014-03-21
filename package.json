@@ -14,7 +14,7 @@
     "licenses" : [
         {
             "type" : "MIT",
-            "url" : "http://github.com/nicjansma/usertiming/raw/master/LICENSE"
+            "url" : "http://github.com/nicjansma/usertiming.js/raw/master/LICENSE.txt"
         }
     ],
     "devDependencies": {
