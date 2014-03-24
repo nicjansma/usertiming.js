@@ -17,6 +17,9 @@
             "url" : "http://github.com/nicjansma/usertiming.js/raw/master/LICENSE.txt"
         }
     ],
+    "scripts": {
+        "test": "grunt travis --verbose"
+    },
     "devDependencies": {
         "nodeunit": ">0.0.0",
         "uglify-js": "1.2.x",
