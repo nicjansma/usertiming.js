@@ -1,6 +1,6 @@
 # UserTiming.js
 
-v0.1.2
+v0.1.3
 
 Copyright 2014 Nic Jansma
 
@@ -129,3 +129,4 @@ Additional notes:
 * v0.1.0 - 2013-04-15: Initial version
 * v0.1.1 - 2014-02-19: Updated dependencies, grunt lint task, bower package name
 * v0.1.2 - 2014-02-19: Small bower.json fix
+* v0.1.3 - 2014-08-07: Include dist/ dir in bower and npm packages

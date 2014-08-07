@@ -1,5 +1,4 @@
 deps
-dist
 test
 .npmignore
 .gitmodules
