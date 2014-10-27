@@ -23,6 +23,11 @@
         window.performance = {};
     }
 
+    // We need to keep a global reference to the window.performance object to
+    // prevent any added properties from being garbage-collected in Safari 8.
+    // https://bugs.webkit.org/show_bug.cgi?id=137407
+    window._perfRefForUserTimingPolyfill = window.performance;
+
     //
     // Note what we shimmed
     //
