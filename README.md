@@ -1,6 +1,6 @@
 # UserTiming.js
 
-v0.1.3
+v0.1.4
 
 Copyright 2014 Nic Jansma
 
@@ -130,3 +130,4 @@ Additional notes:
 * v0.1.1 - 2014-02-19: Updated dependencies, grunt lint task, bower package name
 * v0.1.2 - 2014-02-19: Small bower.json fix
 * v0.1.3 - 2014-08-07: Include dist/ dir in bower and npm packages
+* v0.1.4 - 2014-10-28: Fix for Safari iOS 8
