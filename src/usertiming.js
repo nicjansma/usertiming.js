@@ -119,10 +119,11 @@
     var performanceTimelineRequiresSort = false;
 
     //
-    // If getEntries() isn't defined, we'll assume
-    // we have to shim all of the PT functions.
+    // If getEntries() and mark() aren't defined, we'll assume
+    // we have to shim at least some PT functions.
     //
-    if (typeof(window.performance.getEntries) !== 'function') {
+    if (typeof(window.performance.getEntries) !== 'function' ||
+        typeof(window.performance.mark) !== 'function') {
         window.performance.userTimingJsPerformanceTimeline = true;
 
         // copy prefixed version over if it exists
