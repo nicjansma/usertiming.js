@@ -132,3 +132,4 @@ Additional notes:
 * v0.1.3 - 2014-08-07: Include dist/ dir in bower and npm packages
 * v0.1.4 - 2014-10-28: Fix for Safari iOS 8
 * v0.1.5 - 2015-01-12: Fix for FF 35
+* v0.1.6 - 2015-02-01: Better FF 35 support (or any browser that has RT but not UT)

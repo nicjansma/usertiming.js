@@ -15,7 +15,7 @@
   </head>
   <body>
     <h1 id="nodeunit-header">UserTiming.js Test Suite</h1>
-    
+
     <div>Added window.performance.now() support?
         <span id='addedNow'></span>
         <span id='addedNowPrefixed'></span>
@@ -28,18 +28,18 @@
         <span id='addedUserTiming'></span>
         <span id='addedUserTimingPrefixed'></span>
     </div>
-    
+
     <script>
         // show what was added
         document.getElementById('addedNow').innerHTML = window.performance.userTimingJsNow ? 'Yes' : 'No';
         document.getElementById('addedNowPrefixed').innerHTML = window.performance.userTimingJsNowPrefixed ? '(prefixed)' : '';
-        
+
         document.getElementById('addedPerformanceTimeline').innerHTML = window.performance.userTimingJsPerformanceTimeline ? 'Yes' : 'No';
         document.getElementById('addedPerformanceTimelinePrefixed').innerHTML = window.performance.userTimingJsPerformanceTimelinePrefixed ? '(prefixed)' : '';
-        
+
         document.getElementById('addedUserTiming').innerHTML = window.performance.userTimingJsUserTiming ? 'Yes' : 'No';
         document.getElementById('addedUserTimingPrefixed').innerHTML = window.performance.userTimingJsUserTimingPrefixed ? '(prefixed)' : '';
-        
+
         // run tests
         nodeunit.run({'test': this.exports});
     </script>
