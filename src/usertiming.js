@@ -245,7 +245,7 @@
                 var entries = performanceTimeline.slice(0);
 
                 // if there was a native version of getEntries, add that
-                if (origGetEntries) {
+                if (hasNativeGetEntriesButNotUserTiming && origGetEntries) {
                     // merge in native
                     Array.prototype.push.apply(entries, origGetEntries.call(window.performance));
 
@@ -277,7 +277,7 @@
                 if (typeof(entryType) === 'undefined' ||
                     (entryType !== 'mark' && entryType !== 'measure')) {
 
-                    if (hasNativeGetEntriesButNotUserTiming) {
+                    if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByType) {
                         // native version exists, forward
                         return origGetEntriesByType.call(window.performance, entryType);
                     }
@@ -319,7 +319,7 @@
              */
             window.performance.getEntriesByName = function(name, entryType) {
                 if (entryType && entryType !== 'mark' && entryType !== 'measure') {
-                    if (hasNativeGetEntriesButNotUserTiming) {
+                    if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByName) {
                         // native version exists, forward
                         return origGetEntriesByName.call(window.performance, name, entryType);
                     }
@@ -343,6 +343,16 @@
                     if (performanceTimeline[i].name === name) {
                         entries.push(performanceTimeline[i]);
                     }
+                }
+
+                if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByName) {
+                    // merge in native
+                    Array.prototype.push.apply(entries, origGetEntriesByName.call(window.performance, name, entryType));
+
+                    // sort by startTime
+                    entries.sort(function(a, b) {
+                        return a.startTime - b.startTime;
+                    });
                 }
 
                 return entries;
