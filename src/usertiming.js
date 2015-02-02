@@ -118,12 +118,22 @@
     // whether or not the timeline will require sort on getEntries()
     var performanceTimelineRequiresSort = false;
 
+    // whether or not ResourceTiming is natively supported but UserTiming is
+    // not (eg Firefox 35)
+    var hasNativeGetEntriesButNotUserTiming = false;
+
     //
     // If getEntries() and mark() aren't defined, we'll assume
     // we have to shim at least some PT functions.
     //
     if (typeof(window.performance.getEntries) !== 'function' ||
         typeof(window.performance.mark) !== 'function') {
+
+        if (typeof(window.performance.getEntries) === 'function' &&
+            typeof(window.performance.mark) !== 'function') {
+            hasNativeGetEntriesButNotUserTiming = true;
+        }
+
         window.performance.userTimingJsPerformanceTimeline = true;
 
         // copy prefixed version over if it exists
@@ -217,7 +227,9 @@
             }
         };
 
-        if (typeof(window.performance.getEntries) !== 'function') {
+        if (typeof(window.performance.getEntries) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+            var origGetEntries = window.performance.getEntries;
+
             /**
              * Gets all entries from the Performance Timeline.
              * http://www.w3.org/TR/performance-timeline/#dom-performance-getentries
@@ -230,11 +242,26 @@
                 ensurePerformanceTimelineOrder();
 
                 // get a copy of all of our entries
-                return performanceTimeline.slice(0);
+                var entries = performanceTimeline.slice(0);
+
+                // if there was a native version of getEntries, add that
+                if (hasNativeGetEntriesButNotUserTiming && origGetEntries) {
+                    // merge in native
+                    Array.prototype.push.apply(entries, origGetEntries.call(window.performance));
+
+                    // sort by startTime
+                    entries.sort(function(a, b) {
+                        return a.startTime - b.startTime;
+                    });
+                }
+
+                return entries;
             };
         }
 
-        if (typeof(window.performance.getEntriesByType) !== 'function') {
+        if (typeof(window.performance.getEntriesByType) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+            var origGetEntriesByType = window.performance.getEntriesByType;
+
             /**
              * Gets all entries from the Performance Timeline of the specified type.
              * http://www.w3.org/TR/performance-timeline/#dom-performance-getentriesbytype
@@ -249,6 +276,12 @@
                 // we only support marks/measures
                 if (typeof(entryType) === 'undefined' ||
                     (entryType !== 'mark' && entryType !== 'measure')) {
+
+                    if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByType) {
+                        // native version exists, forward
+                        return origGetEntriesByType.call(window.performance, entryType);
+                    }
+
                     return [];
                 }
 
@@ -269,7 +302,9 @@
             };
         }
 
-        if (typeof(window.performance.getEntriesByName) !== 'function') {
+        if (typeof(window.performance.getEntriesByName) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+            var origGetEntriesByName = window.performance.getEntriesByName;
+
             /**
              * Gets all entries from the Performance Timeline of the specified
              * name, and optionally, type.
@@ -284,6 +319,11 @@
              */
             window.performance.getEntriesByName = function(name, entryType) {
                 if (entryType && entryType !== 'mark' && entryType !== 'measure') {
+                    if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByName) {
+                        // native version exists, forward
+                        return origGetEntriesByName.call(window.performance, name, entryType);
+                    }
+
                     return [];
                 }
 
@@ -303,6 +343,16 @@
                     if (performanceTimeline[i].name === name) {
                         entries.push(performanceTimeline[i]);
                     }
+                }
+
+                if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByName) {
+                    // merge in native
+                    Array.prototype.push.apply(entries, origGetEntriesByName.call(window.performance, name, entryType));
+
+                    // sort by startTime
+                    entries.sort(function(a, b) {
+                        return a.startTime - b.startTime;
+                    });
                 }
 
                 return entries;
