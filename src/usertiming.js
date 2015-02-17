@@ -1,3 +1,4 @@
+/*eslint-env browser,amd,node*/
 //
 // usertiming.js
 //
@@ -11,15 +12,15 @@
 // Licensed under the MIT license
 //
 (function(window) {
-    'use strict';
+    "use strict";
 
     // allow running in Node.js environment
-    if (typeof(window) === 'undefined') {
+    if (typeof window === "undefined") {
         window = {};
     }
 
     // prepare base perf object
-    if (typeof(window.performance) === 'undefined') {
+    if (typeof window.performance === "undefined") {
         window.performance = {};
     }
 
@@ -48,14 +49,14 @@
     // window.performance.now() shim
     //  http://www.w3.org/TR/hr-time/
     //
-    if (typeof(window.performance.now) !== 'function') {
+    if (typeof window.performance.now !== "function") {
         window.performance.userTimingJsNow = true;
 
         // copy prefixed version over if it exists
-        methods = ['webkitNow', 'msNow', 'mozNow'];
+        methods = ["webkitNow", "msNow", "mozNow"];
 
         for (i = 0; i < methods.length; i++) {
-            if (typeof(window.performance[methods[i]]) === 'function') {
+            if (typeof window.performance[methods[i]] === "function") {
                 window.performance.now = window.performance[methods[i]];
 
                 window.performance.userTimingJsNowPrefixed = true;
@@ -76,7 +77,7 @@
             nowOffset = window.performance.timing.navigationStart;
         }
 
-        if (typeof(window.performance.now) !== 'function') {
+        if (typeof window.performance.now !== "function") {
             // No browser support, fall back to Date.now
             if (Date.now) {
                 window.performance.now = function() {
@@ -126,26 +127,26 @@
     // If getEntries() and mark() aren't defined, we'll assume
     // we have to shim at least some PT functions.
     //
-    if (typeof(window.performance.getEntries) !== 'function' ||
-        typeof(window.performance.mark) !== 'function') {
+    if (typeof window.performance.getEntries !== "function" ||
+        typeof window.performance.mark !== "function") {
 
-        if (typeof(window.performance.getEntries) === 'function' &&
-            typeof(window.performance.mark) !== 'function') {
+        if (typeof window.performance.getEntries === "function" &&
+            typeof window.performance.mark !== "function") {
             hasNativeGetEntriesButNotUserTiming = true;
         }
 
         window.performance.userTimingJsPerformanceTimeline = true;
 
         // copy prefixed version over if it exists
-        prefixes = ['webkit', 'moz'];
-        methods = ['getEntries', 'getEntriesByName', 'getEntriesByType'];
+        prefixes = ["webkit", "moz"];
+        methods = ["getEntries", "getEntriesByName", "getEntriesByType"];
 
         for (i = 0; i < methods.length; i++) {
             for (j = 0; j < prefixes.length; j++) {
                 // prefixed method will likely have an upper-case first letter
                 methodTest = prefixes[j] + methods[i].substr(0, 1).toUpperCase() + methods[i].substr(1);
 
-                if (typeof(window.performance[methodTest]) === 'function') {
+                if (typeof window.performance[methodTest] === "function") {
                     window.performance[methods[i]] = window.performance[methodTest];
 
                     window.performance.userTimingJsPerformanceTimelinePrefixed = true;
@@ -167,7 +168,7 @@
             // mark as the start time.  If so, note we have to sort it before
             // returning getEntries();
             //
-            if (obj.entryType === 'measure') {
+            if (obj.entryType === "measure") {
                 performanceTimelineRequiresSort = true;
             }
         };
@@ -184,14 +185,14 @@
             // Measures, which may be in this list, may enter the list in
             // an unsorted order. For example:
             //
-            //  1. measure('a')
-            //  2. mark('start_mark')
-            //  3. measure('b', 'start_mark')
-            //  4. measure('c')
+            //  1. measure("a")
+            //  2. mark("start_mark")
+            //  3. measure("b", "start_mark")
+            //  4. measure("c")
             //  5. getEntries()
             //
             // When calling #5, we should return [a,c,b] because technically the start time
-            // of c is '0' (navigationStart), which will occur before b's start time due to the mark.
+            // of c is "0" (navigationStart), which will occur before b's start time due to the mark.
             //
             performanceTimeline.sort(function(a, b) {
                 return a.startTime - b.startTime;
@@ -203,7 +204,7 @@
         /**
          * Clears the specified entry types from our timeline array.
          *
-         * @param {string} entryType Entry type (eg 'mark' or 'measure')
+         * @param {string} entryType Entry type (eg "mark" or "measure")
          * @param {string} [name] Entry name (optional)
          */
         clearEntriesFromPerformanceTimeline = function(entryType, name) {
@@ -216,7 +217,7 @@
                     continue;
                 }
 
-                if (typeof(name) !== 'undefined' && performanceTimeline[i].name !== name) {
+                if (typeof name !== "undefined" && performanceTimeline[i].name !== name) {
                     // unmatched name
                     i++;
                     continue;
@@ -227,7 +228,7 @@
             }
         };
 
-        if (typeof(window.performance.getEntries) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+        if (typeof window.performance.getEntries !== "function" || hasNativeGetEntriesButNotUserTiming) {
             var origGetEntries = window.performance.getEntries;
 
             /**
@@ -236,7 +237,7 @@
              *
              * NOTE: This will only ever return marks and measures.
              *
-             * @return {PerformanceEntry[]} Array of PerformanceEntrys
+             * @returns {PerformanceEntry[]} Array of PerformanceEntrys
              */
             window.performance.getEntries = function() {
                 ensurePerformanceTimelineOrder();
@@ -259,7 +260,7 @@
             };
         }
 
-        if (typeof(window.performance.getEntriesByType) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+        if (typeof window.performance.getEntriesByType !== "function" || hasNativeGetEntriesButNotUserTiming) {
             var origGetEntriesByType = window.performance.getEntriesByType;
 
             /**
@@ -268,14 +269,14 @@
              *
              * NOTE: This will only work for marks and measures.
              *
-             * @param {string} entryType Entry type (eg 'mark' or 'measure')
+             * @param {string} entryType Entry type (eg "mark" or "measure")
              *
-             * @return {PerformanceEntry[]} Array of PerformanceEntrys
+             * @returns {PerformanceEntry[]} Array of PerformanceEntrys
              */
             window.performance.getEntriesByType = function(entryType) {
                 // we only support marks/measures
-                if (typeof(entryType) === 'undefined' ||
-                    (entryType !== 'mark' && entryType !== 'measure')) {
+                if (typeof entryType === "undefined" ||
+                    (entryType !== "mark" && entryType !== "measure")) {
 
                     if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByType) {
                         // native version exists, forward
@@ -286,7 +287,7 @@
                 }
 
                 // see note in ensurePerformanceTimelineOrder() on why this is required
-                if (entryType === 'measure') {
+                if (entryType === "measure") {
                     ensurePerformanceTimelineOrder();
                 }
 
@@ -302,7 +303,7 @@
             };
         }
 
-        if (typeof(window.performance.getEntriesByName) !== 'function' || hasNativeGetEntriesButNotUserTiming) {
+        if (typeof window.performance.getEntriesByName !== "function" || hasNativeGetEntriesButNotUserTiming) {
             var origGetEntriesByName = window.performance.getEntriesByName;
 
             /**
@@ -313,12 +314,12 @@
              * NOTE: This will only work for marks and measures.
              *
              * @param {string} name Entry name
-             * @param {string} [entryType] Entry type (eg 'mark' or 'measure')
+             * @param {string} [entryType] Entry type (eg "mark" or "measure")
              *
-             * @return {PerformanceEntry[]} Array of PerformanceEntrys
+             * @returns {PerformanceEntry[]} Array of PerformanceEntrys
              */
             window.performance.getEntriesByName = function(name, entryType) {
-                if (entryType && entryType !== 'mark' && entryType !== 'measure') {
+                if (entryType && entryType !== "mark" && entryType !== "measure") {
                     if (hasNativeGetEntriesButNotUserTiming && origGetEntriesByName) {
                         // native version exists, forward
                         return origGetEntriesByName.call(window.performance, name, entryType);
@@ -328,14 +329,14 @@
                 }
 
                 // see note in ensurePerformanceTimelineOrder() on why this is required
-                if (typeof(entryType) !== 'undefined' && entryType === 'measure') {
+                if (typeof entryType !== "undefined" && entryType === "measure") {
                     ensurePerformanceTimelineOrder();
                 }
 
                 // find all entries of the name and (optionally) type
                 var entries = [];
                 for (i = 0; i < performanceTimeline.length; i++) {
-                    if (typeof(entryType) !== 'undefined' &&
+                    if (typeof entryType !== "undefined" &&
                         performanceTimeline[i].entryType !== entryType) {
                         continue;
                     }
@@ -363,19 +364,19 @@
     //
     // UserTiming support
     //
-    if (typeof(window.performance.mark) !== 'function') {
+    if (typeof window.performance.mark !== "function") {
         window.performance.userTimingJsUserTiming = true;
 
         // copy prefixed version over if it exists
-        prefixes = ['webkit', 'moz', 'ms'];
-        methods = ['mark', 'measure', 'clearMarks', 'clearMeasures'];
+        prefixes = ["webkit", "moz", "ms"];
+        methods = ["mark", "measure", "clearMarks", "clearMeasures"];
 
         for (i = 0; i < methods.length; i++) {
             for (j = 0; j < prefixes.length; j++) {
                 // prefixed method will likely have an upper-case first letter
                 methodTest = prefixes[j] + methods[i].substr(0, 1).toUpperCase() + methods[i].substr(1);
 
-                if (typeof(window.performance[methodTest]) === 'function') {
+                if (typeof window.performance[methodTest] === "function") {
                     window.performance[methods[i]] = window.performance[methodTest];
 
                     window.performance.userTimingJsUserTimingPrefixed = true;
@@ -386,7 +387,7 @@
         // only used for measure(), to quickly see the latest timestamp of a mark
         var marks = {};
 
-        if (typeof(window.performance.mark) !== 'function') {
+        if (typeof window.performance.mark !== "function") {
             /**
              * UserTiming mark
              * http://www.w3.org/TR/user-timing/#dom-performance-mark
@@ -397,13 +398,13 @@
                 var now = window.performance.now();
 
                 // mark name is required
-                if (typeof(markName) === 'undefined') {
-                    throw new SyntaxError('Mark name must be specified');
+                if (typeof markName === "undefined") {
+                    throw new SyntaxError("Mark name must be specified");
                 }
 
                 // mark name can't be a NT timestamp
                 if (window.performance.timing && markName in window.performance.timing) {
-                    throw new SyntaxError('Mark name is not allowed');
+                    throw new SyntaxError("Mark name is not allowed");
                 }
 
                 if (!marks[markName]) {
@@ -414,7 +415,7 @@
 
                 // add to perf timeline as well
                 addToPerformanceTimeline({
-                    entryType: 'mark',
+                    entryType: "mark",
                     name: markName,
                     startTime: now,
                     duration: 0
@@ -422,7 +423,7 @@
             };
         }
 
-        if (typeof(window.performance.clearMarks) !== 'function') {
+        if (typeof window.performance.clearMarks !== "function") {
             /**
              * UserTiming clear marks
              * http://www.w3.org/TR/user-timing/#dom-performance-clearmarks
@@ -437,11 +438,11 @@
                     marks[markName] = [];
                 }
 
-                clearEntriesFromPerformanceTimeline('mark', markName);
+                clearEntriesFromPerformanceTimeline("mark", markName);
             };
         }
 
-        if (typeof(window.performance.measure) !== 'function') {
+        if (typeof window.performance.measure !== "function") {
             /**
              * UserTiming measure
              * http://www.w3.org/TR/user-timing/#dom-performance-measure
@@ -453,15 +454,15 @@
             window.performance.measure = function (measureName, startMark, endMark) {
                 var now = window.performance.now();
 
-                if (typeof(measureName) === 'undefined') {
-                    throw new SyntaxError('Measure must be specified');
+                if (typeof measureName === "undefined") {
+                    throw new SyntaxError("Measure must be specified");
                 }
 
                 // if there isn't a startMark, we measure from navigationStart to now
                 if (!startMark) {
                     // add to perf timeline as well
                     addToPerformanceTimeline({
-                        entryType: 'measure',
+                        entryType: "measure",
                         name: measureName,
                         startTime: 0,
                         duration: now
@@ -477,18 +478,16 @@
                 var startMarkTime = 0;
                 if (window.performance.timing && startMark in window.performance.timing) {
                     // mark cannot have a timing of 0
-                    if (startMark !== 'navigationStart' && window.performance.timing[startMark] === 0) {
-                        throw new Error(startMark + ' has a timing of 0');
+                    if (startMark !== "navigationStart" && window.performance.timing[startMark] === 0) {
+                        throw new Error(startMark + " has a timing of 0");
                     }
 
                     // time is the offset of this mark to navigationStart's time
                     startMarkTime = window.performance.timing[startMark] - window.performance.timing.navigationStart;
+                } else if (startMark in marks) {
+                    startMarkTime = marks[startMark][marks[startMark].length - 1];
                 } else {
-                    if (startMark in marks) {
-                        startMarkTime = marks[startMark][marks[startMark].length - 1];
-                    } else {
-                        throw new Error(startMark + ' mark not found');
-                    }
+                    throw new Error(startMark + " mark not found");
                 }
 
                 //
@@ -502,18 +501,16 @@
 
                     if (window.performance.timing && endMark in window.performance.timing) {
                         // mark cannot have a timing of 0
-                        if (endMark !== 'navigationStart' && window.performance.timing[endMark] === 0) {
-                            throw new Error(endMark + ' has a timing of 0');
+                        if (endMark !== "navigationStart" && window.performance.timing[endMark] === 0) {
+                            throw new Error(endMark + " has a timing of 0");
                         }
 
                         // time is the offset of this mark to navigationStart's time
                         endMarkTime = window.performance.timing[endMark] - window.performance.timing.navigationStart;
+                    } else if (endMark in marks) {
+                        endMarkTime = marks[endMark][marks[endMark].length - 1];
                     } else {
-                        if (endMark in marks) {
-                            endMarkTime = marks[endMark][marks[endMark].length - 1];
-                        } else {
-                            throw new Error(endMark + ' mark not found');
-                        }
+                        throw new Error(endMark + " mark not found");
                     }
                 }
 
@@ -522,7 +519,7 @@
 
                 // add to perf timeline as well
                 addToPerformanceTimeline({
-                    entryType: 'measure',
+                    entryType: "measure",
                     name: measureName,
                     startTime: startMarkTime,
                     duration: duration
@@ -530,7 +527,7 @@
             };
         }
 
-        if (typeof(window.performance.clearMeasures) !== 'function') {
+        if (typeof window.performance.clearMeasures !== "function") {
             /**
              * UserTiming clear measures
              * http://www.w3.org/TR/user-timing/#dom-performance-clearmeasures
@@ -538,7 +535,7 @@
              * @param {string} measureName Measure name
              */
             window.performance.clearMeasures = function (measureName) {
-                clearEntriesFromPerformanceTimeline('measure', measureName);
+                clearEntriesFromPerformanceTimeline("measure", measureName);
             };
         }
     }
@@ -549,17 +546,17 @@
     // When included directly via a script tag in the browser, we're good as we've been
     // updating the window.performance object.
     //
-    if (typeof define !== 'undefined' && define.amd) {
+    if (typeof define !== "undefined" && define.amd) {
         //
         // AMD / RequireJS
         //
         define([], function () {
             return window.performance;
         });
-    } else if (typeof module !== 'undefined' && typeof(module.exports) !== 'undefined') {
+    } else if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
         //
         // Node.js
         //
         module.exports = window.performance;
     }
-}(typeof(window) !== 'undefined' ? window : undefined));
+}(typeof window !== "undefined" ? window : undefined));
