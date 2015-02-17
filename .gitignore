@@ -1,4 +1,8 @@
 /node_modules
-npm-debug.log
 .project
 .settings/
+npm-debug.log
+/eslint.xml
+/test/*.tap
+/test/coverage
+/test/vendor
