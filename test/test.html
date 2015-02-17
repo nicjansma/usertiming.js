@@ -1,47 +1,54 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>UserTiming.js Test Suite</title>
-    <script src="../deps/nodeunit.js"></script>
-    <script src="../src/usertiming.js"></script>
-    <link rel="stylesheet" href="../deps/nodeunit.css" type="text/css" media="screen" />
-    <script>
-      var _requires = {
-          "../src/usertiming": window.performance
-      };
-      this.require = function (name) { return _requires[name]; };
-      this.exports = {};
-    </script>
-    <script src="test.js"></script>
-  </head>
-  <body>
-    <h1 id="nodeunit-header">UserTiming.js Test Suite</h1>
+    <head>
+        <title>UserTiming.js Test Suite</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="vendor/mocha/mocha.css" />
+        <script src="vendor/mocha/mocha.js"></script>
+        <script src="vendor/expect/index.js"></script>
+        <script src="../src/usertiming.js"></script>
+    </head>
+    <body>
+        <div>Added window.performance.now() support?
+            <span id='addedNow'></span>
+            <span id='addedNowPrefixed'></span>
+        </div>
+        <div>Added PerformanceTimeline support?
+            <span id='addedPerformanceTimeline'></span>
+            <span id='addedPerformanceTimelinePrefixed'></span>
+        </div>
+        <div>Added UserTiming support?
+            <span id='addedUserTiming'></span>
+            <span id='addedUserTimingPrefixed'></span>
+        </div>
 
-    <div>Added window.performance.now() support?
-        <span id='addedNow'></span>
-        <span id='addedNowPrefixed'></span>
-    </div>
-    <div>Added PerformanceTimeline support?
-        <span id='addedPerformanceTimeline'></span>
-        <span id='addedPerformanceTimelinePrefixed'></span>
-    </div>
-    <div>Added UserTiming support?
-        <span id='addedUserTiming'></span>
-        <span id='addedUserTimingPrefixed'></span>
-    </div>
+        <div id="mocha"></div>
+        <script>
+            mocha.setup('bdd');
+        </script>
+        <script src="test-mark.js"></script>
+        <script src="test-measure.js"></script>
+        <script src="test-now.js"></script>
+        <script src="test-performancetimeline.js"></script>
+        <script>
+            mocha.run();
+        </script>
 
-    <script>
-        // show what was added
-        document.getElementById('addedNow').innerHTML = window.performance.userTimingJsNow ? 'Yes' : 'No';
-        document.getElementById('addedNowPrefixed').innerHTML = window.performance.userTimingJsNowPrefixed ? '(prefixed)' : '';
+        <script>
+            // show what was added
+            document.getElementById('addedNow').innerHTML = window.performance.userTimingJsNow ? 'Yes' : 'No';
+            document.getElementById('addedNowPrefixed').innerHTML = window.performance.userTimingJsNowPrefixed ? '(prefixed)' : '';
 
-        document.getElementById('addedPerformanceTimeline').innerHTML = window.performance.userTimingJsPerformanceTimeline ? 'Yes' : 'No';
-        document.getElementById('addedPerformanceTimelinePrefixed').innerHTML = window.performance.userTimingJsPerformanceTimelinePrefixed ? '(prefixed)' : '';
+            document.getElementById('addedPerformanceTimeline').innerHTML = window.performance.userTimingJsPerformanceTimeline ? 'Yes' : 'No';
+            document.getElementById('addedPerformanceTimelinePrefixed').innerHTML = window.performance.userTimingJsPerformanceTimelinePrefixed ? '(prefixed)' : '';
 
-        document.getElementById('addedUserTiming').innerHTML = window.performance.userTimingJsUserTiming ? 'Yes' : 'No';
-        document.getElementById('addedUserTimingPrefixed').innerHTML = window.performance.userTimingJsUserTimingPrefixed ? '(prefixed)' : '';
+            document.getElementById('addedUserTiming').innerHTML = window.performance.userTimingJsUserTiming ? 'Yes' : 'No';
+            document.getElementById('addedUserTimingPrefixed').innerHTML = window.performance.userTimingJsUserTimingPrefixed ? '(prefixed)' : '';
 
-        // run tests
-        nodeunit.run({'test': this.exports});
-    </script>
+            // run tests
+            nodeunit.run({'test': this.exports});
+        </script>
+
   </body>
 </html>

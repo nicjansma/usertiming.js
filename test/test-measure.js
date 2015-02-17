@@ -59,15 +59,11 @@
         });
 
         it("should throw an error if not given a name", function() {
-            expect(usertiming.measure).to.throwException(function (e) {
-              expect(e).to.be.a(SyntaxError);
-            });
+            expect(usertiming.measure).to.throwException();
         });
 
         it("should throw an error if not given a name", function() {
-            expect(usertiming.measure).to.throwException(function (e) {
-              expect(e).to.be.a(SyntaxError);
-            });
+            expect(usertiming.measure).to.throwException();
         });
 
         it("should throw an exception if the start mark name is not found", function() {

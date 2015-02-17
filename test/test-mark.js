@@ -29,9 +29,7 @@
         });
 
         it("should throw an exception when a null argument is given", function() {
-            expect(usertiming.mark).to.throwException(function (e) {
-              expect(e).to.be.a(SyntaxError);
-            });
+            expect(usertiming.mark).to.throwException();
         });
 
         it("should throw an exception when passing in a NavigationTiming mark", function() {
@@ -42,7 +40,7 @@
                 window.performance.timing.navigationStart) {
                 expect(function() {
                     usertiming.mark("navigationStart");
-                }).to.throw();
+                }).to.throwException();
             }
         });
 
