@@ -1,5 +1,10 @@
-deps
-test
-.npmignore
+.bowerrc
+.eslintrc
 .gitmodules
+.npmignore
+.travis.yml
 Gruntfile.js
+bower.json
+dist
+karma.config.js
+test
