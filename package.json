@@ -21,13 +21,24 @@
         "test": "grunt travis --verbose"
     },
     "devDependencies": {
-        "nodeunit": ">0.0.0",
-        "uglify-js": "1.2.x",
-        "jshint": ">0.0.0",
-        "grunt": "~0.4.0",
-        "grunt-cli": "~0.1.0",
-        "grunt-contrib-jshint": ">0.0.0",
-        "grunt-contrib-nodeunit": ">0.0.0",
-        "grunt-contrib-uglify": ">0.0.0"
+        "expect.js": "^0.3.1",
+        "grunt": ">= 0.4.0",
+        "grunt-contrib-clean": "^0.6.0",
+        "grunt-contrib-uglify": ">0.0.0",
+        "grunt-karma": "^0.10.1",
+        "grunt-mocha-test": "^0.12.7",
+        "gruntify-eslint": ">0.0.0",
+        "karma": "^0.12.31",
+        "karma-chrome-launcher": "^0.1.5",
+        "karma-coverage": "^0.2.6",
+        "karma-expect": "^1.1.0",
+        "karma-firefox-launcher": "^0.1.4",
+        "karma-ie-launcher": "^0.1.5",
+        "karma-mocha": "^0.1.9",
+        "karma-opera-launcher": "^0.1.0",
+        "karma-phantomjs-launcher": "^0.1.4",
+        "karma-safari-launcher": "^0.1.1",
+        "karma-tap-reporter": "0.0.3",
+        "mocha": "^2.1.0"
     }
 }
