@@ -453,8 +453,8 @@
             window.performance.measure = function (measureName, startMark, endMark) {
                 var now = window.performance.now();
 
-                if (!measureName) {
-                    throw new Error('Measure must be specified');
+                if (typeof(measureName) === 'undefined') {
+                    throw new SyntaxError('Measure must be specified');
                 }
 
                 // if there isn't a startMark, we measure from navigationStart to now
