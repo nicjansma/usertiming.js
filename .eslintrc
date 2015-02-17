@@ -1,0 +1,45 @@
+{
+    "rules": {
+        // enabled over default
+        "valid-jsdoc": [1, {
+            "requireReturn": false,
+            "prefer": {
+                "return": "returns"
+            }
+        }],
+        "guard-for-in": 2,
+        "no-div-regex": 2,
+        "no-else-return": 2,
+        "no-eq-null": 2,
+        "no-floating-decimal": 2,
+        "no-self-compare": 2,
+        "no-void": 2,
+        "radix": 2,
+        "wrap-iife": 2,
+        "no-mixed-requires": 2,
+        "no-new-require": 2,
+        "no-path-concat": 2,
+        "brace-style": [2, "1tbs", { "allowSingleLine": false }],
+        "comma-style": [2, "last"],
+        "consistent-this": [2, "that"],
+        "no-inline-comments": 2,
+        "no-lonely-if": 2,
+        "no-multiple-empty-lines": [1, {"max": 1}],
+        "no-nested-ternary": 2,
+        "space-after-function-name": [2, "never"],
+        "space-after-keywords": 1,
+        "space-before-blocks": 1,
+        "space-in-brackets": 1,
+        "space-in-parens": 1,
+        "space-unary-ops": 1,
+        "spaced-line-comment": 1,
+        "max-len": [1, 120, 4],
+
+        //
+        // Disabled
+        //
+
+        // disabled for use of _jQuery
+        "no-underscore-dangle": 0
+    }
+}
