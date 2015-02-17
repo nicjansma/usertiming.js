@@ -1,63 +1,105 @@
+/*eslint-env node*/
 module.exports = function(grunt) {
+    "use strict";
+
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON("package.json"),
+        clean: {
+            options: {},
+            build: ["test/*.tap", "test/coverage"]
+        },
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> v<%= pkg.version %> */\n'
+                banner: "/*! <%= pkg.name %> v<%= pkg.version %> */\n",
+                mangle: true,
+                sourceMap: true
             },
             build: {
-                src: 'src/<%= pkg.name %>.js',
-                dest: 'dist/<%= pkg.name %>.min.js'
+                src: "src/<%= pkg.name %>.js",
+                dest: "dist/<%= pkg.name %>.min.js"
             }
         },
-        jshint: {
-            files: [ 'src/**/*.js', 'test/**/*.js' ],
+        eslint: {
+            console: {
+                src: [
+                    "Gruntfile.js",
+                    "src/**/*.js",
+                    "test/*.js"
+                ]
+            },
+            build: {
+                options: {
+                    "output-file": "eslint.xml",
+                    "format": "jslint-xml",
+                    "silent": true
+                },
+                src: [
+                    "Gruntfile.js",
+                    "src/**/*.js",
+                    "test/*.js"
+                ]
+            }
+        },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: "tap",
+                    captureFile: "test/mocha.tap"
+                },
+                src: [
+                    "src/usertiming.js",
+                    "test/test*.js"
+                ]
+            }
+        },
+        karma: {
             options: {
-                bitwise: true, 
-                camelcase: true, 
-                curly: true, 
-                eqeqeq: true, 
-                forin: true, 
-                immed: true,
-                indent: 4, 
-                latedef: true, 
-                newcap: true, 
-                noempty: true, 
-                nonew: true, 
-                quotmark: true, 
-                jquery: true,
-                undef: true, 
-                unused: true, 
-                strict: true, 
-                trailing: true, 
-                browser: true, 
-                node: true,
-                white: false,
-                globals: {
-                    define: true,
-                    window: true
-                }
+                singleRun: true,
+                colors: true,
+                configFile: "./karma.config.js",
+                preprocessors: {
+                    "./src/*.js": ["coverage"]
+                },
+                basePath: "./",
+                files: [
+                    "test/vendor/mocha/mocha.css",
+                    "test/vendor/mocha/mocha.js",
+                    "test/vendor/expect/index.js",
+                    "src/usertiming.js",
+                    "test/test*.js"
+                ]
+            },
+            console: {
+                browsers: ["PhantomJS"],
+                frameworks: ["mocha"]
             }
-        },
-        nodeunit: {
-            all: ['test/*.js']
         }
     });
 
     //
     // Plugins
     //
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("gruntify-eslint");
+    grunt.loadNpmTasks("grunt-mocha-test");
+    grunt.loadNpmTasks("grunt-karma");
+    grunt.loadNpmTasks("grunt-contrib-clean");
 
     //
     // Tasks
     //
-    grunt.registerTask('default', ['jshint', 'uglify']);
-    grunt.registerTask('test', ['nodeunit']);
-    grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('travis', ['nodeunit', 'jshint']);
-    grunt.registerTask('all', ['nodeunit', 'jshint', 'uglify']);
+    grunt.registerTask("test", ["mochaTest", "karma:console"]);
+
+    grunt.registerTask("lint", ["eslint:console"]);
+    grunt.registerTask("lint:build", ["eslint:build"]);
+
+    grunt.registerTask("build", ["uglify"]);
+
+    //
+    // Task Groups
+    //
+    grunt.registerTask("default", ["lint", "build"]);
+    grunt.registerTask("travis", ["test", "lint"]);
+    grunt.registerTask("all", ["clean", "test", "lint:build", "build"]);
 };
