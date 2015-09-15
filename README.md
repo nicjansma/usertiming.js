@@ -57,8 +57,8 @@ usertiming.js is also available via [bower](http://bower.io/). You can install u
 
 usertiming.js is available from the following CDNs:
 
-* [jsdelivr.com](http://www.jsdelivr.com/projects/usertiming.js): `http://www.jsdelivr.com/projects/usertiming.js`
-* [cdnjs.com](https://cdnjs.com/libraries/usertiming): `https://cdnjs.com/libraries/usertiming`
+* [jsdelivr.com](http://www.jsdelivr.com/projects/usertiming.js): [`http://www.jsdelivr.com/projects/usertiming.js`](http://www.jsdelivr.com/projects/usertiming.js)
+* [cdnjs.com](https://cdnjs.com/libraries/usertiming): [`https://cdnjs.com/libraries/usertiming`](https://cdnjs.com/libraries/usertiming)
 
 ## Usage
 
