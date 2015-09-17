@@ -11,12 +11,7 @@
     "bugs" : {
         "url" : "http://github.com/nicjansma/usertiming.js/issues"
     },
-    "licenses" : [
-        {
-            "type" : "MIT",
-            "url" : "http://github.com/nicjansma/usertiming.js/raw/master/LICENSE.txt"
-        }
-    ],
+    "license": "MIT",
     "scripts": {
         "test": "grunt travis --verbose"
     },
