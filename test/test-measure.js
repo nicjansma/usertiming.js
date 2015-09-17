@@ -1,4 +1,4 @@
-/*eslint-env node,browser,mocha*/
+/* eslint-env node,browser,mocha */
 (function(root) {
     "use strict";
 
@@ -69,7 +69,7 @@
         it("should throw an exception if the start mark name is not found", function() {
             expect(function() {
                 usertiming.measure("foo", "BAD_MARK!");
-            }).to.throwException(function (e) {
+            }).to.throwException(function(e) {
               expect(e).to.be.a(Error);
             });
         });
@@ -78,7 +78,7 @@
             usertiming.mark("1");
             expect(function() {
                 usertiming.measure("foo", "1", "BAD_MARK!");
-            }).to.throwException(function (e) {
+            }).to.throwException(function(e) {
               expect(e).to.be.a(Error);
             });
         });

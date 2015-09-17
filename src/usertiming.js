@@ -1,4 +1,4 @@
-/*eslint-env browser,amd,node*/
+/* eslint-env browser,amd,node */
 //
 // usertiming.js
 //
@@ -394,7 +394,7 @@
              *
              * @param {string} markName Mark name
              */
-            window.performance.mark = function (markName) {
+            window.performance.mark = function(markName) {
                 var now = window.performance.now();
 
                 // mark name is required
@@ -430,7 +430,7 @@
              *
              * @param {string} markName Mark name
              */
-            window.performance.clearMarks = function (markName) {
+            window.performance.clearMarks = function(markName) {
                 if (!markName) {
                     // clear all marks
                     marks = {};
@@ -451,7 +451,7 @@
              * @param {string} [startMark] Start mark name
              * @param {string} [endMark] End mark name
              */
-            window.performance.measure = function (measureName, startMark, endMark) {
+            window.performance.measure = function(measureName, startMark, endMark) {
                 var now = window.performance.now();
 
                 if (typeof measureName === "undefined") {
@@ -534,7 +534,7 @@
              *
              * @param {string} measureName Measure name
              */
-            window.performance.clearMeasures = function (measureName) {
+            window.performance.clearMeasures = function(measureName) {
                 clearEntriesFromPerformanceTimeline("measure", measureName);
             };
         }
@@ -550,7 +550,7 @@
         //
         // AMD / RequireJS
         //
-        define([], function () {
+        define([], function() {
             return window.performance;
         });
     } else if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
