@@ -546,7 +546,7 @@
     // When included directly via a script tag in the browser, we're good as we've been
     // updating the window.performance object.
     //
-    if (typeof define !== "undefined" && define.amd) {
+    if (typeof define === "function" && define.amd) {
         //
         // AMD / RequireJS
         //
