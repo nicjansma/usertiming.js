@@ -12,7 +12,7 @@
     var expect = root.expect ? root.expect : require("expect.js");
     var usertiming = root.performance ? root.performance : require("../src/usertiming");
 
-    describe("mark()", function() {
+    describe("measure()", function() {
         beforeEach(function() {
             usertiming.clearMarks();
             usertiming.clearMeasures();
