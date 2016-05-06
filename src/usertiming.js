@@ -75,6 +75,12 @@
         var nowOffset = +(new Date());
         if (window.performance.timing && window.performance.timing.navigationStart) {
             nowOffset = window.performance.timing.navigationStart;
+        } else if (typeof process !== "undefined" && typeof process.hrtime === "function") {
+            nowOffset = process.hrtime();
+            window.performance.now = function() {
+                var time = process.hrtime(nowOffset);
+                return time[0] * 1e3 + time[1] * 1e-6;
+            }
         }
 
         if (typeof window.performance.now !== "function") {
