@@ -1,6 +1,6 @@
 # UserTiming.js
 
-v0.1.7
+v0.1.8
 
 Copyright 2014 Nic Jansma
 
@@ -141,3 +141,4 @@ Additional notes:
 * v0.1.5 - 2015-01-12: Fix for FF 35
 * v0.1.6 - 2015-02-01: Better FF 35 support (or any browser that has RT but not UT)
 * v0.1.7 - 2015-09-14: Dev-only changes: Lint, switched from NodeUnit to Mocha
+* v0.1.8 - 2016-05-15: Fall back to process.hrtime() if available
