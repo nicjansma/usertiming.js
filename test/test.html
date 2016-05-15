@@ -45,9 +45,6 @@
 
             document.getElementById('addedUserTiming').innerHTML = window.performance.userTimingJsUserTiming ? 'Yes' : 'No';
             document.getElementById('addedUserTimingPrefixed').innerHTML = window.performance.userTimingJsUserTimingPrefixed ? '(prefixed)' : '';
-
-            // run tests
-            nodeunit.run({'test': this.exports});
         </script>
 
   </body>

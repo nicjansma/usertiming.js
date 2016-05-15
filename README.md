@@ -95,9 +95,9 @@ JavaScript has some disadvantages over native (built into the browser) implement
 
 ### UserTiming.js tests
 
-UserTiming.js tests are provided in the ``test/`` directory, and can be run via ``nodeunit``:
+UserTiming.js tests are provided in the ``test/`` directory, and can be run via ``mocha``:
 
-    nodeunit test/test.js
+    mocha test
 
 Or via ``grunt``:
 
@@ -128,7 +128,7 @@ Additional notes:
 * ``usertiming.js`` does **not pass** the IDL tests (``idlharness.html``), nor will it ever.
 
 * The W3C test harness itself does not appear to work in several older browsers (IE <= 8, Firefox 3.6, etc).  The
-    UserTiming.js [test cases](#Tests) should cover most of what the W3C tests are doing, and the nodeunit test harness
+    UserTiming.js [test cases](#Tests) should cover most of what the W3C tests are doing, and the mocha test harness
     works in these older browsers.
 
 ## Version History
