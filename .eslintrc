@@ -85,7 +85,6 @@
         "no-multiple-empty-lines": [1, {"max": 1}],
         "no-nested-ternary": 2,
         "space-before-function-paren": [2, "never"],
-        "space-after-keywords": 1,
         "space-before-blocks": 1,
         "object-curly-spacing": 1,
         "computed-property-spacing": 1,
