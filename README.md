@@ -2,7 +2,7 @@
 
 v0.1.8
 
-Copyright 2014 Nic Jansma
+Copyright 2017 Nic Jansma
 
 http://nicj.net
 
