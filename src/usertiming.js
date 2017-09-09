@@ -109,6 +109,7 @@
      * Will be blank if the environment supports PT.
      */
     var addToPerformanceTimeline = function() {
+        // NOP
     };
 
     /**
@@ -117,6 +118,7 @@
      * Will be blank if the environment supports PT.
      */
     var clearEntriesFromPerformanceTimeline = function() {
+        // NOP
     };
 
     // performance timeline array

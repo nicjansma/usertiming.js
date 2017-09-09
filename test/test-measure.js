@@ -70,7 +70,7 @@
             expect(function() {
                 usertiming.measure("foo", "BAD_MARK!");
             }).to.throwException(function(e) {
-              expect(e).to.be.a(Error);
+                expect(e).to.be.a(Error);
             });
         });
 
@@ -79,7 +79,7 @@
             expect(function() {
                 usertiming.measure("foo", "1", "BAD_MARK!");
             }).to.throwException(function(e) {
-              expect(e).to.be.a(Error);
+                expect(e).to.be.a(Error);
             });
         });
     });
