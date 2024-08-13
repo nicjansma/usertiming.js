@@ -16,6 +16,7 @@
     "test": "grunt travis --verbose"
   },
   "devDependencies": {
+    "bower": "^1.8.14",
     "eslint-config-nicjansma": "^1.0.4",
     "expect.js": "^0.3.1",
     "grunt": "^1.0.1",
